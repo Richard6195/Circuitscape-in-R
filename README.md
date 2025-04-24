@@ -9,6 +9,8 @@ This function aims to streamline workflows for:
 - **Advanced mode**: (partial) for one-to-all/all-to-one setups (not heavily tested).
 - **Optionally** plotting the resulting cumulative current map in R.
 
+![circuitscape Screenshot](circuitscape Screenshot.png)
+
 ### Key Features
 
 - **Generates** a `.ini` file for Circuitscape based on user inputs.
