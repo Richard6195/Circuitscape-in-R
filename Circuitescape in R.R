@@ -339,7 +339,7 @@ circuitscape_run <- function(
     
     # Return them in a list so the user can inspect:
     return(
-      invisible(result = result)
+      result
     )
 }
 
