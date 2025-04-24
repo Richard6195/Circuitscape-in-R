@@ -9,7 +9,7 @@ This function aims to streamline workflows for:
 - **Advanced mode**: (partial) for one-to-all/all-to-one setups (not heavily tested).
 - **Optionally** plotting the resulting cumulative current map in R.
 
-![circuitscape Screenshot](circuitscape Screenshot.png)
+![circuitscape Screenshot](circuitscapeScreenshot.png)
 
 ### Key Features
 
