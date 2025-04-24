@@ -6,7 +6,7 @@
 
 ### Main Function Signature:
   
-  # cost_file: path to your ASCII or GeoTIFF cost/resistance raster.
+  # cost_file: path to your ASCII cost/resistance raster.
   # focal_nodes_file: path to your .txt with focal points (no column/row names) or ACII (ASCII file as the "focal node polygon" input) 
   # scenario: "pairwise" is typical for multi-focal connectivity.  'advanced' mode for one-to-all / all-to-one requires additional arguments (ground_file, source_file, remove_src_or_gnd, use_direct_grounds, etc.)
   # habitat_map_is_resistance: set TRUE if your file is a resistance raster; if it’s conductance, set FALSE.
