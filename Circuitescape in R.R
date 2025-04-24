@@ -286,8 +286,8 @@ circuitscape_run <- function(
     on.exit(setwd(old_wd), add = TRUE)
     
     message("Running Circuitscape with scenario='", scenario,
-            "', use_polygons=", use_polygons_value,
-            " for point_file='", point_file_value, "' ...")
+            "', point_file='", point_file_val, 
+            "', short-circuit use_polygons=false ...")
     
     
     output <- capture.output({
