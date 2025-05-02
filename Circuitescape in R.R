@@ -314,15 +314,28 @@ circuitscape_run <- function(
         if (!is.null(plot_extent) && length(plot_extent) == 4) {
           # c(xmin, xmax, ymin, ymax)
           e <- raster::extent(plot_extent[1], plot_extent[2], plot_extent[3], plot_extent[4])
-          cum_map <- raster::crop(cum_map, e)
+          tryCatch(
+            {
+              cum_map <- raster::crop(cum_map, e)
+            },
+            error = function(f) {
+              message("Issue in cropping the current map - likely supplied extent does not ovelerlap actual supplied data. Ignoring cropping...")
+            }
+          )
         }
         
         # Plot with optional zlim
         if (is.null(plot_zlim)) {
+         
           raster::plot(cum_map,
                        main = paste("Circuitscape Cumulative Current:", output_name),
                        col = terrain.colors(100))
-        } else {
+          
+        } else if (!is.null(plot_zlim) && length(plot_zlim) == 2) {
+          mask_vals <- getValues(cum_map)
+          mask_vals[mask_vals < plot_zlim[1]] <- plot_zlim[1]
+          mask_vals[mask_vals > plot_zlim[2]] <- plot_zlim[2]
+          cum_map <- setValues(cum_map, mask_vals)
           raster::plot(cum_map,
                        main = paste("Circuitscape Cumulative Current:", output_name),
                        col = terrain.colors(100),
@@ -349,13 +362,13 @@ circuitscape_run <- function(
 setwd("xxx") # Set working directory to where data files are.
 
 res <- circuitscape_run(
-  cost_file          = "myCostSurface.asc",
-  focal_points_file  = "myPoints.txt",
+  cost_file          = "Arwen_CostSurface_inverse_ud.asc",
+  focal_points_file  = "Arwen_CoreNodes_UseScape_tiny.txt",
   output_name        = "ExampleCircuitscape",
   run_in_julia       = TRUE,
   plot               = TRUE,
   plot_extent        = c(550000, 560000, 915000, 925000),  # optional
-  plot_zlim          = c(0, 20),                           # optional
+  plot_zlim          = c(0, 15),                           # optional
   print_ini_lines    = TRUE,
   parallelize = TRUE, # multi-core
   max_parallel = 4, # how many cores
